@@ -9,49 +9,80 @@
 
 body{
 font-family: Arial, sans-serif;
-background:#f0f0f0;
+background: linear-gradient(135deg,#4facfe,#00f2fe);
 margin:0;
 padding:0;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
 }
 
 .container{
-width:60%;
-margin:50px auto;
 background:white;
-padding:40px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
+width:500px;
+padding:30px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
 text-align:center;
 }
 
 h1{
 color:#2c3e50;
+margin-bottom:5px;
 }
 
-h2{
-margin-top:30px;
+.subtitle{
+color:gray;
+margin-bottom:20px;
 }
 
-ul{
+.features{
 text-align:left;
-display:inline-block;
+margin:20px 0;
+}
+
+.features li{
+margin:6px 0;
+}
+
+input{
+padding:10px;
+width:70%;
+border:1px solid #ccc;
+border-radius:5px;
+margin-top:10px;
 }
 
 button{
-padding:10px 20px;
-margin:10px;
-font-size:16px;
+padding:10px 18px;
+margin-top:10px;
+border:none;
+border-radius:5px;
+background:#4facfe;
+color:white;
+font-size:15px;
 cursor:pointer;
 }
 
-#output{
-margin-top:20px;
-font-weight:bold;
+button:hover{
+background:#2b8be6;
 }
 
-a{
-color:blue;
+.total{
+margin-top:15px;
+font-size:18px;
+font-weight:bold;
+color:#27ae60;
+}
+
+.repo{
+margin-top:20px;
+}
+
+.repo a{
 text-decoration:none;
+color:#4facfe;
 font-weight:bold;
 }
 
@@ -63,45 +94,38 @@ font-weight:bold;
 <div class="container">
 
 <h1>Expense & Budget Tracker</h1>
-
-<h3>DA1 Mini Project – C Programming</h3>
+<p class="subtitle">DA1 Mini Project – C Programming</p>
 
 <p>
-This application helps users manage daily expenses and track their personal budget.
-The system is implemented using the C programming language with file handling
-to store expense records.
+Track your daily expenses and manage your personal budget efficiently.
+This project demonstrates file handling and expense management using C programming.
 </p>
 
-<h2>Features</h2>
+<h3>Features</h3>
 
-<ul>
+<ul class="features">
 <li>Add Expense</li>
-<li>View Expense List</li>
-<li>Delete Expense</li>
-<li>Calculate Total Expenses</li>
-<li>File Storage using C</li>
+<li>Track Total Expenses</li>
+<li>Simple Budget Monitoring</li>
+<li>File Handling in C</li>
 </ul>
 
-<h2>Demo Expense Tracker</h2>
+<h3>Add Expense</h3>
+
+<input type="number" id="expense" placeholder="Enter expense amount">
+
+<br>
 
 <button onclick="addExpense()">Add Expense</button>
-<button onclick="viewTotal()">View Total Expense</button>
+<button onclick="showTotal()">Show Total</button>
 
-<div id="output"></div>
+<div class="total" id="total"></div>
 
-<h2>Technology Used</h2>
-
-<p>C Programming</p>
-<p>File Handling</p>
-<p>GitHub Pages Deployment</p>
-
-<h2>Project Source Code</h2>
-
-<p>
+<div class="repo">
 <a href="https://github.com/sainaathr/expense-tracker-da1" target="_blank">
 View Source Code on GitHub
 </a>
-</p>
+</div>
 
 </div>
 
@@ -111,16 +135,22 @@ let expenses=[];
 
 function addExpense(){
 
-let amount=prompt("Enter Expense Amount:");
+let amount=document.getElementById("expense").value;
 
-if(amount!=null && amount!=""){
+if(amount==""){
+alert("Enter amount");
+return;
+}
+
 expenses.push(parseFloat(amount));
-document.getElementById("output").innerHTML="Expense Added: ₹"+amount;
-}
+
+document.getElementById("expense").value="";
+
+alert("Expense Added Successfully");
 
 }
 
-function viewTotal(){
+function showTotal(){
 
 let total=0;
 
@@ -128,11 +158,12 @@ for(let i=0;i<expenses.length;i++){
 total+=expenses[i];
 }
 
-document.getElementById("output").innerHTML="Total Expense: ₹"+total;
+document.getElementById("total").innerHTML="Total Expense: ₹ "+total;
 
 }
 
 </script>
 
 </body>
+
 </html>
