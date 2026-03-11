@@ -1,16 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+<meta charset="UTF-8">
 <title>Expense & Budget Tracker</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:#f0f0f0;
+margin:0;
+padding:0;
+}
+
+.container{
+width:60%;
+margin:50px auto;
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+h1{
+color:#2c3e50;
+}
+
+h2{
+margin-top:30px;
+}
+
+ul{
+text-align:left;
+display:inline-block;
+}
+
+button{
+padding:10px 20px;
+margin:10px;
+font-size:16px;
+cursor:pointer;
+}
+
+#output{
+margin-top:20px;
+font-weight:bold;
+}
+
+a{
+color:blue;
+text-decoration:none;
+font-weight:bold;
+}
+
+</style>
 </head>
 
 <body>
 
+<div class="container">
+
 <h1>Expense & Budget Tracker</h1>
 
-<p>DA1 Mini Project - C Programming</p>
+<h3>DA1 Mini Project – C Programming</h3>
 
-<p>This project helps users track expenses and manage personal budgets.</p>
+<p>
+This application helps users manage daily expenses and track their personal budget.
+The system is implemented using the C programming language with file handling
+to store expense records.
+</p>
+
+<h2>Features</h2>
+
+<ul>
+<li>Add Expense</li>
+<li>View Expense List</li>
+<li>Delete Expense</li>
+<li>Calculate Total Expenses</li>
+<li>File Storage using C</li>
+</ul>
+
+<h2>Demo Expense Tracker</h2>
+
+<button onclick="addExpense()">Add Expense</button>
+<button onclick="viewTotal()">View Total Expense</button>
+
+<div id="output"></div>
+
+<h2>Technology Used</h2>
+
+<p>C Programming</p>
+<p>File Handling</p>
+<p>GitHub Pages Deployment</p>
+
 <h2>Project Source Code</h2>
 
 <p>
@@ -18,19 +102,37 @@
 View Source Code on GitHub
 </a>
 </p>
-<h2>Features</h2>
 
-<ul>
-<li>Add Expense</li>
-<li>View Expenses</li>
-<li>Delete Expense</li>
-<li>Calculate Total Expenses</li>
-<li>File Storage using C</li>
-</ul>
+</div>
 
-<h2>Technology Used</h2>
+<script>
 
-<p>C Programming Language</p>
+let expenses=[];
+
+function addExpense(){
+
+let amount=prompt("Enter Expense Amount:");
+
+if(amount!=null && amount!=""){
+expenses.push(parseFloat(amount));
+document.getElementById("output").innerHTML="Expense Added: ₹"+amount;
+}
+
+}
+
+function viewTotal(){
+
+let total=0;
+
+for(let i=0;i<expenses.length;i++){
+total+=expenses[i];
+}
+
+document.getElementById("output").innerHTML="Total Expense: ₹"+total;
+
+}
+
+</script>
 
 </body>
 </html>
