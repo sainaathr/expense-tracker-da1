@@ -1,169 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <title>Expense & Budget Tracker</title>
-
 <style>
-
-body{
-font-family: Arial, sans-serif;
-background: linear-gradient(135deg,#4facfe,#00f2fe);
-margin:0;
-padding:0;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
-
-.container{
-background:white;
-width:500px;
-padding:30px;
-border-radius:12px;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
-text-align:center;
-}
-
-h1{
-color:#2c3e50;
-margin-bottom:5px;
-}
-
-.subtitle{
-color:gray;
-margin-bottom:20px;
-}
-
-.features{
-text-align:left;
-margin:20px 0;
-}
-
-.features li{
-margin:6px 0;
-}
-
-input{
-padding:10px;
-width:70%;
-border:1px solid #ccc;
-border-radius:5px;
-margin-top:10px;
-}
-
-button{
-padding:10px 18px;
-margin-top:10px;
-border:none;
-border-radius:5px;
-background:#4facfe;
-color:white;
-font-size:15px;
-cursor:pointer;
-}
-
-button:hover{
-background:#2b8be6;
-}
-
-.total{
-margin-top:15px;
-font-size:18px;
-font-weight:bold;
-color:#27ae60;
-}
-
-.repo{
-margin-top:20px;
-}
-
-.repo a{
-text-decoration:none;
-color:#4facfe;
-font-weight:bold;
-}
-
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  h1 {
+    color: #89b4fa;
+    margin-bottom: 6px;
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+  p.sub {
+    color: #6c7086;
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+  #terminal {
+    background: #11111b;
+    border: 1px solid #313244;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 750px;
+    height: 420px;
+    overflow-y: auto;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cdd6f4;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  #input-row {
+    display: flex;
+    width: 100%;
+    max-width: 750px;
+    margin-top: 10px;
+    gap: 8px;
+  }
+  #prompt-label {
+    color: #a6e3a1;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    padding: 10px 12px;
+    background: #11111b;
+    border: 1px solid #313244;
+    border-radius: 8px 0 0 8px;
+    white-space: nowrap;
+  }
+  #user-input {
+    flex: 1;
+    background: #181825;
+    color: #cdd6f4;
+    border: 1px solid #45475a;
+    border-left: none;
+    padding: 10px 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    outline: none;
+  }
+  #user-input:focus { border-color: #89b4fa; }
+  #send-btn {
+    background: #89b4fa;
+    color: #1e1e2e;
+    border: none;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+  }
+  #send-btn:hover { background: #b4befe; }
+  .info {
+    color: #6c7086;
+    font-size: 12px;
+    margin-top: 10px;
+    max-width: 750px;
+    text-align: center;
+  }
+  #status {
+    color: #f38ba8;
+    font-size: 12px;
+    margin-top: 6px;
+  }
 </style>
 </head>
-
 <body>
-
-<div class="container">
-
-<h1>Expense & Budget Tracker</h1>
-<p class="subtitle">DA1 Mini Project – C Programming</p>
-
-<p>
-Track your daily expenses and manage your personal budget efficiently.
-This project demonstrates file handling and expense management using C programming.
-</p>
-
-<h3>Features</h3>
-
-<ul class="features">
-<li>Add Expense</li>
-<li>Track Total Expenses</li>
-<li>Simple Budget Monitoring</li>
-<li>File Handling in C</li>
-</ul>
-
-<h3>Add Expense</h3>
-
-<input type="number" id="expense" placeholder="Enter expense amount">
-
-<br>
-
-<button onclick="addExpense()">Add Expense</button>
-<button onclick="showTotal()">Show Total</button>
-
-<div class="total" id="total"></div>
-
-<div class="repo">
-<a href="https://github.com/sainaathr/expense-tracker-da1" target="_blank">
-View Source Code on GitHub
-</a>
+<h1>Expense &amp; Budget Tracker</h1>
+<p class="sub">DA1 — C Programming Mini Project | R Sainaath | 25BCE1960</p>
+<div id="terminal">Loading program...</div>
+<div id="input-row">
+  <span id="prompt-label">&gt;</span>
+  <input id="user-input" type="text" placeholder="Type your input here and press Enter..." autofocus/>
+  <button id="send-btn" onclick="sendInput()">Send</button>
 </div>
+<p class="info">Type a number and press Enter or click Send to interact with the program.</p>
+<div id="status"></div>
 
-</div>
+<script type='text/javascript'>
+  var Module = {
+    print: function(text) {
+      var t = document.getElementById('terminal');
+      t.textContent += text + '\n';
+      t.scrollTop = t.scrollHeight;
+    },
+    printErr: function(text) {
+      var t = document.getElementById('terminal');
+      t.textContent += text + '\n';
+      t.scrollTop = t.scrollHeight;
+    },
+    canvas: (function() {
+      var canvas = document.createElement('canvas');
+      return canvas;
+    })(),
+    setStatus: function(text) {
+      if (text) document.getElementById('status').textContent = text;
+    },
+    onRuntimeInitialized: function() {
+      document.getElementById('terminal').textContent = '';
+      document.getElementById('status').textContent = 'Program running. Type a menu option below.';
+    }
+  };
 
-<script>
+  var inputQueue = [];
+  var inputBuffer = '';
+  var waitingForInput = false;
 
-let expenses=[];
+  function sendInput() {
+    var inp = document.getElementById('user-input');
+    var val = inp.value;
+    inp.value = '';
+    var t = document.getElementById('terminal');
+    t.textContent += '> ' + val + '\n';
+    t.scrollTop = t.scrollHeight;
+    inputQueue.push(val + '\n');
+  }
 
-function addExpense(){
-
-let amount=document.getElementById("expense").value;
-
-if(amount==""){
-alert("Enter amount");
-return;
-}
-
-expenses.push(parseFloat(amount));
-
-document.getElementById("expense").value="";
-
-alert("Expense Added Successfully");
-
-}
-
-function showTotal(){
-
-let total=0;
-
-for(let i=0;i<expenses.length;i++){
-total+=expenses[i];
-}
-
-document.getElementById("total").innerHTML="Total Expense: ₹ "+total;
-
-}
-
+  document.getElementById('user-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') sendInput();
+  });
 </script>
-
+<script src="index.js"></script>
 </body>
-
 </html>
